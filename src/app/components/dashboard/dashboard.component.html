@@ -1,0 +1,83 @@
+<div class="dashboard-container">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <h2>🔍 Lost & Found - RYMEC</h2>
+    </div>
+    <div class="navbar-menu">
+      <span class="admin-badge" *ngIf="isAdmin">🔐 ADMIN</span>
+      <span class="user-info" *ngIf="currentUser">Welcome, {{ currentUser.name }}!</span>
+      <button class="btn btn-logout" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="dashboard-content">
+    <div class="hero-section">
+      <h1>Lost & Found Management System</h1>
+      <p>Help reunite people with their lost belongings</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-info">
+          <h3>Total Items</h3>
+          <p class="stat-number">{{ lostItemsCount + foundItemsCount + reunitedCount }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">❌</div>
+        <div class="stat-info">
+          <h3>Lost Items</h3>
+          <p class="stat-number">{{ lostItemsCount }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">✅</div>
+        <div class="stat-info">
+          <h3>Found Items</h3>
+          <p class="stat-number">{{ foundItemsCount }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🤝</div>
+        <div class="stat-info">
+          <h3>Reunited</h3>
+          <p class="stat-number">{{ reunitedCount }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-cards">
+      <div class="action-card">
+        <div class="action-icon">🔍</div>
+        <h3>Report Lost Item</h3>
+        <p>Lost something? Report it here to help find it</p>
+        <button class="btn btn-action" routerLink="/report-lost">Report Lost</button>
+      </div>
+
+      <div class="action-card">
+        <div class="action-icon">📦</div>
+        <h3>Report Found Item</h3>
+        <p>Found something? Help return it to the owner</p>
+        <button class="btn btn-action" routerLink="/report-found">Report Found</button>
+      </div>
+
+      <div class="action-card">
+        <div class="action-icon">📋</div>
+        <h3>View All Items</h3>
+        <p>Browse through all lost and found items</p>
+        <button class="btn btn-action" routerLink="/view-items">View Items</button>
+      </div>
+
+      <div class="action-card" *ngIf="isAdmin">
+        <div class="action-icon">🔗</div>
+        <h3>Smart Matching</h3>
+        <p>Find potential matches between lost and found items</p>
+        <button class="btn btn-action" routerLink="/matching">View Matches</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-section">
+      <h1>🔍 Lost & Found - RYMEC</h1>
+      <p>Help reunite people with their belongings</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <h2>Login</h2>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [class.is-invalid]="submitted && f['email'].errors"
+          placeholder="Enter your email"
+        />
+        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+          <div *ngIf="f['email'].errors['required']">Email is required</div>
+          <div *ngIf="f['email'].errors['email']">Please enter a valid email</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [class.is-invalid]="submitted && f['password'].errors"
+          placeholder="Enter your password"
+        />
+        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+          <div *ngIf="f['password'].errors['required']">Password is required</div>
+          <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</div>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        <span *ngIf="loading" class="spinner"></span>
+        {{ loading ? 'Logging in...' : 'Login' }}
+      </button>
+
+      <div class="divider">
+        <span>OR</span>
+      </div>
+
+      <button type="button" class="btn btn-admin" (click)="showAdminLogin()">
+        🔐 Admin Login
+      </button>
+
+      <div class="register-link">
+        <p>Don't have an account? <a routerLink="/register">Register here</a></p>
+      </div>
+    </form>
+
+    <!-- Admin Login Modal -->
+    <div class="modal-overlay" *ngIf="showAdminModal" (click)="closeAdminModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h2>Admin Login</h2>
+        <form [formGroup]="adminForm" (ngSubmit)="onAdminSubmit()" class="admin-form">
+          <div class="form-group">
+            <label for="adminPassword">Admin Password</label>
+            <input
+              type="password"
+              id="adminPassword"
+              formControlName="password"
+              class="form-control"
+              placeholder="Enter admin password"
+              autofocus
+            />
+          </div>
+
+          <div *ngIf="adminErrorMessage" class="alert alert-danger">
+            {{ adminErrorMessage }}
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" (click)="closeAdminModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="adminLoading">
+              {{ adminLoading ? 'Logging in...' : 'Login as Admin' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

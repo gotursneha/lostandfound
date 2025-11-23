@@ -1,0 +1,125 @@
+<div class="about-page">
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="container">
+      <h1 class="page-title">About Us</h1>
+      <p class="page-subtitle">Learn more about the project and the team behind it</p>
+    </div>
+  </section>
+
+  <!-- Managed By Section -->
+  <section class="managed-by-section">
+    <div class="container">
+      <h2 class="section-title">Managed By</h2>
+      <div class="college-card">
+        <div class="college-icon">🎓</div>
+        <div class="college-info">
+          <h3 class="college-name">Rao Bahadur Y Mahabaleshwarappa Engineering College</h3>
+          <p class="college-description">
+            This project is developed and managed under the guidance of Rao Bahadur Y Mahabaleshwarappa 
+            Engineering College, committed to fostering innovation and practical learning experiences 
+            for students in computer science and engineering.
+          </p>
+          <div class="college-details">
+            <div class="detail-item">
+              <strong>Focus:</strong> Engineering Education & Innovation
+            </div>
+            <div class="detail-item">
+              <strong>Mission:</strong> Empowering students with real-world project experience
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developer Section -->
+  <section class="developer-section">
+    <div class="container">
+      <div class="developer-card">
+        <div class="developer-avatar">
+          <div class="avatar-placeholder">👨‍💻</div>
+        </div>
+        <div class="developer-info">
+          <h2 class="developer-name">{{ developer.name }}</h2>
+          <p class="developer-role">{{ developer.role }}</p>
+          <p class="developer-bio">{{ developer.bio }}</p>
+          <p class="developer-email">
+            <strong>Contact:</strong> 
+            <a [href]="'mailto:' + developer.email">{{ developer.email }}</a>
+          </p>
+          
+          <div class="skills-section">
+            <h3>Technical Skills</h3>
+            <div class="skills-grid">
+              <span class="skill-tag" *ngFor="let skill of developer.skills">{{ skill }}</span>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a [href]="developer.social.github" target="_blank" class="social-btn">
+              <span>GitHub</span>
+            </a>
+            <a [href]="developer.social.linkedin" target="_blank" class="social-btn">
+              <span>LinkedIn</span>
+            </a>
+            <a [href]="developer.social.twitter" target="_blank" class="social-btn">
+              <span>Twitter</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Info Section -->
+  <section class="project-section">
+    <div class="container">
+      <h2 class="section-title">About This Project</h2>
+      
+      <div class="project-purpose">
+        <h3>Purpose</h3>
+        <p>{{ projectInfo.purpose }}</p>
+      </div>
+
+      <div class="project-vision">
+        <h3>Vision</h3>
+        <p>{{ projectInfo.vision }}</p>
+      </div>
+
+      <div class="technologies-section">
+        <h3>Technologies Used</h3>
+        <div class="tech-grid">
+          <div class="tech-card" *ngFor="let tech of projectInfo.technologies">
+            <h4>{{ tech.name }}</h4>
+            <p>{{ tech.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-section">
+    <div class="container">
+      <h2 class="section-title">Our Mission</h2>
+      <div class="mission-content">
+        <div class="mission-card">
+          <div class="mission-icon">🎯</div>
+          <h3>Simplify Recovery</h3>
+          <p>Make it easy for people to report and find their lost belongings</p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon">🤝</div>
+          <h3>Build Community</h3>
+          <p>Foster a helpful community that works together to reunite items with owners</p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon">🔒</div>
+          <h3>Ensure Safety</h3>
+          <p>Provide a secure platform for managing sensitive lost and found information</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

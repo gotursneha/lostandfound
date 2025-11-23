@@ -1,0 +1,287 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  overflow: auto;
+}
+
+.login-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 440px;
+  overflow: hidden;
+  margin: auto;
+}
+
+.logo-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px 30px;
+  text-align: center;
+}
+
+.logo-section h1 {
+  margin: 0 0 8px 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.logo-section p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.login-form {
+  padding: 30px 30px;
+}
+
+.login-form h2 {
+  margin: 0 0 25px 0;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 6px;
+}
+
+.alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #e1e8ed;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.divider span {
+  background: white;
+  padding: 0 15px;
+  color: #999;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn-admin {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  margin-bottom: 15px;
+}
+
+.btn-admin:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.admin-form .form-group {
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-actions .btn {
+  flex: 1;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.register-link {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.register-link p {
+  color: #666;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    border-radius: 0;
+  }
+
+  .logo-section {
+    padding: 30px 20px;
+  }
+
+  .logo-section h1 {
+    font-size: 2rem;
+  }
+
+  .login-form {
+    padding: 30px 20px;
+  }
+}

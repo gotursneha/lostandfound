@@ -1,0 +1,144 @@
+<div class="contact-page">
+  <!-- Hero Section -->
+  <section class="contact-hero">
+    <div class="container">
+      <h1 class="page-title">Contact Us</h1>
+      <p class="page-subtitle">Have a question or suggestion? We'd love to hear from you!</p>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form-section">
+    <div class="container">
+      <div class="contact-content">
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h2>Get in Touch</h2>
+          <p>Fill out the form and we'll get back to you as soon as possible.</p>
+
+          <div class="info-items">
+            <div class="info-item">
+              <div class="info-icon">📧</div>
+              <div class="info-text">
+                <h3>Email</h3>
+                <p>support{{ '@' }}lostandfound.com</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">📱</div>
+              <div class="info-text">
+                <h3>Phone</h3>
+                <p>+1 (555) 123-4567</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">📍</div>
+              <div class="info-text">
+                <h3>Location</h3>
+                <p>123 Main Street, City, State 12345</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon">🕐</div>
+              <div class="info-text">
+                <h3>Business Hours</h3>
+                <p>Mon-Fri: 9:00 AM - 6:00 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="form-container">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input
+                type="text"
+                id="name"
+                formControlName="name"
+                class="form-control"
+                [class.is-invalid]="submitted && f['name'].errors"
+                placeholder="Enter your name"
+              />
+              <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name'].errors['required']">Name is required</div>
+                <div *ngIf="f['name'].errors['minlength']">Name must be at least 2 characters</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                class="form-control"
+                [class.is-invalid]="submitted && f['email'].errors"
+                placeholder="Enter your email"
+              />
+              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                <div *ngIf="f['email'].errors['email']">Please enter a valid email</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <input
+                type="text"
+                id="subject"
+                formControlName="subject"
+                class="form-control"
+                [class.is-invalid]="submitted && f['subject'].errors"
+                placeholder="What is this about?"
+              />
+              <div *ngIf="submitted && f['subject'].errors" class="invalid-feedback">
+                <div *ngIf="f['subject'].errors['required']">Subject is required</div>
+                <div *ngIf="f['subject'].errors['minlength']">Subject must be at least 5 characters</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea
+                id="message"
+                formControlName="message"
+                class="form-control"
+                rows="6"
+                [class.is-invalid]="submitted && f['message'].errors"
+                placeholder="Tell us more..."
+              ></textarea>
+              <div *ngIf="submitted && f['message'].errors" class="invalid-feedback">
+                <div *ngIf="f['message'].errors['required']">Message is required</div>
+                <div *ngIf="f['message'].errors['minlength']">Message must be at least 10 characters</div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="success-modal" *ngIf="showSuccess" (click)="closeSuccess()">
+    <div class="success-content" (click)="$event.stopPropagation()">
+      <div class="success-icon">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="32" fill="#4CAF50"/>
+          <path d="M20 32L28 40L44 24" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2>Request Submitted!</h2>
+      <p>Thank you for contacting us. We'll get back to you soon.</p>
+      <button class="btn btn-primary" (click)="closeSuccess()">Close</button>
+    </div>
+  </div>
+</div>

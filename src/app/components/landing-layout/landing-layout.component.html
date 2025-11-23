@@ -1,0 +1,32 @@
+<div class="landing-layout">
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <h1>🔍 Lost & Found - RYMEC</h1>
+      </div>
+      
+      <nav class="nav-menu" [class.mobile-open]="mobileMenuOpen">
+        <a routerLink="/home" routerLinkActive="active" (click)="closeMobileMenu()">Home</a>
+        <a routerLink="/about" routerLinkActive="active" (click)="closeMobileMenu()">About Us</a>
+        <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
+        <a routerLink="/login" class="login-btn" (click)="closeMobileMenu()">Login</a>
+      </nav>
+
+      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+        <span *ngIf="!mobileMenuOpen">☰</span>
+        <span *ngIf="mobileMenuOpen">✕</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Lost & Found. All rights reserved.</p>
+      <p>Helping reunite people with their belongings</p>
+    </div>
+  </footer>
+</div>

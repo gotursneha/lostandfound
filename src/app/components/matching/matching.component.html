@@ -1,0 +1,144 @@
+<div class="matching-container">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <h2>🔍 Lost & Found - RYMEC</h2>
+    </div>
+    <div class="navbar-menu">
+      <span class="admin-badge" *ngIf="isAdmin">🔐 ADMIN</span>
+      <button class="btn btn-dashboard" routerLink="/dashboard">Dashboard</button>
+      <button class="btn btn-logout" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="header">
+    <h1>🔍 Smart Matching</h1>
+    <p>Find potential matches between lost and found items</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Analyzing items and finding matches...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!loading && matches.length === 0" class="no-matches">
+    <div class="empty-state">
+      <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <h2>No Matches Found</h2>
+      <p>There are currently no potential matches between lost and found items.</p>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && matches.length > 0" class="matches-container">
+    <div class="matches-summary">
+      <h3>Found {{ matches.length }} potential matches</h3>
+      <p>Sorted by match confidence (highest first)</p>
+    </div>
+
+    <div class="match-card" *ngFor="let match of matches">
+      <div class="match-header">
+        <div class="match-score" [style.background]="getMatchColor(match.matchScore)">
+          {{ match.matchScore }}%
+        </div>
+        <div class="match-reasons">
+          <span *ngFor="let reason of match.matchReasons" class="reason-badge">
+            {{ reason }}
+          </span>
+        </div>
+      </div>
+
+      <div class="items-comparison">
+        <!-- Lost Item -->
+        <div class="item-section lost-item">
+          <div class="item-label">Lost Item</div>
+          <div class="item-content">
+            <img [src]="match.lostItem.imageUrl" 
+                 [alt]="match.lostItem.itemName"
+                 onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+            <div class="item-details">
+              <h4>{{ match.lostItem.itemName }}</h4>
+              <p class="category">{{ match.lostItem.category }}</p>
+              <p class="description">{{ match.lostItem.description }}</p>
+              <div class="meta-info">
+                <div class="meta-item">
+                  <strong>Lost on:</strong> {{ match.lostItem.date | date:'mediumDate' }}
+                </div>
+                <div class="meta-item">
+                  <strong>Location:</strong> {{ match.lostItem.location }}
+                </div>
+                <div class="meta-item">
+                  <strong>Contact:</strong> {{ match.lostItem.contactName }}
+                </div>
+                <div class="meta-item">
+                  <strong>Email:</strong> {{ match.lostItem.contactEmail }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-icon">⟷</div>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- Found Item -->
+        <div class="item-section found-item">
+          <div class="item-label">Found Item</div>
+          <div class="item-content">
+            <img [src]="match.foundItem.imageUrl" 
+                 [alt]="match.foundItem.itemName"
+                 onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+            <div class="item-details">
+              <h4>{{ match.foundItem.itemName }}</h4>
+              <p class="category">{{ match.foundItem.category }}</p>
+              <p class="description">{{ match.foundItem.description }}</p>
+              <div class="meta-info">
+                <div class="meta-item">
+                  <strong>Found on:</strong> {{ match.foundItem.date | date:'mediumDate' }}
+                </div>
+                <div class="meta-item">
+                  <strong>Location:</strong> {{ match.foundItem.location }}
+                </div>
+                <div class="meta-item">
+                  <strong>Contact:</strong> {{ match.foundItem.contactName }}
+                </div>
+                <div class="meta-item">
+                  <strong>Email:</strong> {{ match.foundItem.contactEmail }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="match-actions">
+        <button class="reunite-btn" (click)="openReuniteModal(match)">
+          ✅ Mark as Reunited
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reunite Modal -->
+  <div class="modal-overlay" *ngIf="showReuniteModal" (click)="closeReuniteModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Confirm Reunite</h2>
+      <p>Are you sure you want to mark these items as reunited?</p>
+      <p class="modal-info">Both parties will be notified via email.</p>
+      
+      <div class="modal-actions">
+        <button class="cancel-btn" (click)="closeReuniteModal()">Cancel</button>
+        <button class="confirm-btn" (click)="reuniteItems()">Confirm Reunite</button>
+      </div>
+    </div>
+  </div>
+</div>

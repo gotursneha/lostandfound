@@ -1,0 +1,84 @@
+<div class="home-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Lost Something? Found Something?</h1>
+      <p class="hero-subtitle">We're here to help reunite people with their belongings</p>
+      <p class="hero-description">
+        Our Lost & Found platform makes it easy to report lost items, search for found items, 
+        and connect with others to return belongings to their rightful owners.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" routerLink="/login">Get Started</button>
+        <button class="btn btn-secondary" (click)="scrollToHow()">Learn More</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="floating-card">🔍</div>
+    </div>
+  </section>
+
+  <!-- What is Lost & Found Section -->
+  <section class="what-is-section">
+    <div class="container">
+      <h2 class="section-title">What is Lost & Found?</h2>
+      <p class="section-description">
+        Lost & Found is a community-driven platform designed to help people recover their lost items 
+        and return found items to their rightful owners. We provide a centralized database where users 
+        can report lost or found items, search through listings, and connect with each other to facilitate 
+        safe and efficient returns.
+      </p>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-number">1000+</div>
+          <div class="stat-label">Items Reported</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Successful Reunions</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2000+</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">Why Choose Our Platform?</h2>
+      <div class="features-grid">
+        <div class="feature-card" *ngFor="let feature of features">
+          <div class="feature-icon">{{ feature.icon }}</div>
+          <h3 class="feature-title">{{ feature.title }}</h3>
+          <p class="feature-description">{{ feature.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works-section" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps-container">
+        <div class="step-card" *ngFor="let step of howItWorks">
+          <div class="step-number">{{ step.step }}</div>
+          <h3 class="step-title">{{ step.title }}</h3>
+          <p class="step-description">{{ step.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-title">Ready to Get Started?</h2>
+      <p class="cta-description">Join our community and help make a difference</p>
+      <button class="btn btn-large" routerLink="/login">Sign Up Now</button>
+    </div>
+  </section>
+</div>

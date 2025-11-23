@@ -1,0 +1,146 @@
+<div class="view-items-page">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <h2>🔍 Lost & Found - RYMEC</h2>
+    </div>
+    <div class="navbar-menu">
+      <span class="admin-badge" *ngIf="isAdmin">🔐 ADMIN</span>
+      <button class="btn btn-dashboard" routerLink="/dashboard">Dashboard</button>
+      <button class="btn btn-logout" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Lost & Found Items</h1>
+      <p>Browse through all reported items</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'lost'"
+        (click)="setActiveTab('lost')"
+      >
+        Lost Items ({{ lostItems.length }})
+      </button>
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'found'"
+        (click)="setActiveTab('found')"
+      >
+        Found Items ({{ foundItems.length }})
+      </button>
+      <button 
+        class="tab-btn reunited-tab" 
+        [class.active]="activeTab === 'reunited'"
+        (click)="setActiveTab('reunited')"
+      >
+        🤝 Reunited ({{ reunitedCount }})
+      </button>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-error">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="loading">
+      <p>Loading items...</p>
+    </div>
+
+    <!-- Items Grid -->
+    <div *ngIf="!loading && displayedItems.length > 0" class="items-grid">
+      <div *ngFor="let item of displayedItems" class="item-card" [class.reunited]="item.status === 'resolved'">
+        <div class="item-header">
+          <h3>{{ item.itemName }}</h3>
+          <div class="header-badges">
+            <span class="item-category">{{ item.category }}</span>
+            <span *ngIf="activeTab === 'reunited'" class="type-badge" [class.lost-type]="item.type === 'lost'" [class.found-type]="item.type === 'found'">
+              {{ item.type === 'lost' ? 'Was Lost' : 'Was Found' }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="item-image" *ngIf="item.imageUrl">
+          <img [src]="item.imageUrl" [alt]="item.itemName" />
+        </div>
+
+        <div class="item-details">
+          <p class="item-description">{{ item.description }}</p>
+          
+          <div class="item-info">
+            <div class="info-row">
+              <span class="label">Date:</span>
+              <span class="value">{{ item.date | date: 'MMM d, y' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Location:</span>
+              <span class="value">{{ item.location }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Status:</span>
+              <span class="status-badge" [class.active]="item.status === 'active'" [class.resolved]="item.status === 'resolved'">
+                {{ item.status === 'resolved' ? '✅ Reunited' : item.status }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-contact">
+          <h4>Contact Information</h4>
+          <p><strong>Name:</strong> {{ item.contactName }}</p>
+          <p><strong>Email:</strong> {{ item.contactEmail }}</p>
+          <p><strong>Phone:</strong> {{ item.contactPhone }}</p>
+        </div>
+
+        <!-- Matched Item Info (for reunited items) -->
+        <div *ngIf="item.matchedWith && item.status === 'resolved'" class="matched-info">
+          <h4>🤝 Matched With</h4>
+          <div class="matched-details">
+            <p><strong>Item:</strong> {{ item.matchedWith.itemName }}</p>
+            <p><strong>Type:</strong> 
+              <span class="type-badge-small" [class.lost-type]="item.matchedWith.type === 'lost'" [class.found-type]="item.matchedWith.type === 'found'">
+                {{ item.matchedWith.type === 'lost' ? 'Lost Item' : 'Found Item' }}
+              </span>
+            </p>
+            <p><strong>Contact:</strong> {{ item.matchedWith.contactName }}</p>
+            <p><strong>Email:</strong> {{ item.matchedWith.contactEmail }}</p>
+          </div>
+        </div>
+
+        <div class="item-footer">
+          <small>Reported on {{ item.createdAt | date: 'MMM d, y, h:mm a' }}</small>
+          <small *ngIf="item.resolvedAt"> • Reunited on {{ item.resolvedAt | date: 'MMM d, y, h:mm a' }}</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Items -->
+    <div *ngIf="!loading && displayedItems.length === 0" class="no-items">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" stroke="#ddd" stroke-width="4"/>
+        <path d="M30 50h40M50 30v40" stroke="#ddd" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <h3 *ngIf="activeTab !== 'reunited'">No {{ activeTab }} items yet</h3>
+      <h3 *ngIf="activeTab === 'reunited'">No reunited items yet</h3>
+      <p *ngIf="activeTab !== 'reunited'">Be the first to report a {{ activeTab }} item!</p>
+      <p *ngIf="activeTab === 'reunited'">Once items are matched and reunited, they will appear here!</p>
+      <button *ngIf="activeTab !== 'reunited'" class="btn btn-primary" [routerLink]="activeTab === 'lost' ? '/report-lost' : '/report-found'">
+        Report {{ activeTab === 'lost' ? 'Lost' : 'Found' }} Item
+      </button>
+      <button *ngIf="activeTab === 'reunited' && isAdmin" class="btn btn-primary" routerLink="/matching">
+        View Matching
+      </button>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-secondary" routerLink="/dashboard">Back to Dashboard</button>
+      <button class="btn btn-primary" routerLink="/report-lost">Report Lost Item</button>
+      <button class="btn btn-primary" routerLink="/report-found">Report Found Item</button>
+      <button *ngIf="isAdmin" class="btn btn-primary" routerLink="/matching">Smart Matching</button>
+    </div>
+  </div>
+</div>

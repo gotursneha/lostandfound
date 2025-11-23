@@ -1,0 +1,27 @@
+{
+  "lostItems": [
+    {
+      "id": "1763873829879",
+      "type": "lost",
+      "itemName": "wallet",
+      "category": "Wallet/Purse",
+      "description": "brown colour",
+      "date": "2025-11-23",
+      "location": "library",
+      "contactName": "g sneha",
+      "contactEmail": "sneha@gmail.com",
+      "contactPhone": "8495044947",
+      "imageUrl": "",
+      "status": "resolved",
+      "createdAt": "2025-11-23T04:57:09.879Z",
+      "resolvedAt": "2025-11-23T05:39:02.570Z",
+      "matchedWith": {
+        "id": "1763873924984",
+        "type": "found",
+        "itemName": "wallet",
+        "contactName": "Mailaresh S",
+        "contactEmail": "mailareshshavi@gmail.com"
+      }
+    }
+  ]
+}
